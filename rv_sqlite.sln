@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rv_sqlite", "rv_sqlite.vcxproj", "{E0D8F01E-BAE9-4C7B-899D-CC480C19F86F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E0D8F01E-BAE9-4C7B-899D-CC480C19F86F}.Debug|x64.ActiveCfg = Debug|x64
+		{E0D8F01E-BAE9-4C7B-899D-CC480C19F86F}.Debug|x64.Build.0 = Debug|x64
+		{E0D8F01E-BAE9-4C7B-899D-CC480C19F86F}.Debug|x86.ActiveCfg = Debug|Win32
+		{E0D8F01E-BAE9-4C7B-899D-CC480C19F86F}.Debug|x86.Build.0 = Debug|Win32
+		{E0D8F01E-BAE9-4C7B-899D-CC480C19F86F}.Release|x64.ActiveCfg = Release|x64
+		{E0D8F01E-BAE9-4C7B-899D-CC480C19F86F}.Release|x64.Build.0 = Release|x64
+		{E0D8F01E-BAE9-4C7B-899D-CC480C19F86F}.Release|x86.ActiveCfg = Release|Win32
+		{E0D8F01E-BAE9-4C7B-899D-CC480C19F86F}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DE673877-5208-471F-8173-310F14D6B614}
+	EndGlobalSection
+EndGlobal
