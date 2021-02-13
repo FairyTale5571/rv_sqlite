@@ -14,9 +14,12 @@
 #include <cstring>
 #include <sstream>
 
+#include <boost/format.hpp>
+
+
 // add headers that you want to pre-compile here
 #include "framework.h"
-#include "sqlite3\sqlite3.h"
 
+#include "sqlite3/sqlite3.h"
 
 #endif //PCH_H
