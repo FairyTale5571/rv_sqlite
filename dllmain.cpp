@@ -19,8 +19,16 @@ RVExtensionRegisterCallback(int(*callbackProc)(char const* name, char const* fun
 void __stdcall 
 RVExtension(char* output, int outputSize, const char* function)
 {
+	if (!strcmp(function, "version"))
+		MACROS_STRNCPY("0.0.1");
+
+	if (!strcmp(function,"version_sqlite"))
+		MACROS_STRNCPY(SQLITE_VERSION);
+
 	strncpy(output, function, outputSize);
 }
+
+SQLITE sql;
 
 int __stdcall 
 RVExtensionArgs(char* output, int outputSize, const char* function, const char** argv, int argc)
@@ -29,7 +37,6 @@ RVExtensionArgs(char* output, int outputSize, const char* function, const char**
 	std::string str[11];
 	std::string fnStr = function;
 	std::string out;
-	SQLITE sql;
 	while (i < argc)
 	{
 		std::string s = argv[i];
@@ -42,7 +49,7 @@ RVExtensionArgs(char* output, int outputSize, const char* function, const char**
 	if (!strcmp(function, "open"))
 	{
 		sql.set_name(str[0]);
-		if (sql.open())
+		if (sql.open() != SQLITE_OK)
 		{
 			out = boost::str(boost::format("Database Connection to %1% error %2%") % argv[0] % sql.get_name());
 			MACROS_STRNCPY(out.c_str());
@@ -54,9 +61,17 @@ RVExtensionArgs(char* output, int outputSize, const char* function, const char**
 	}
 	if (!strcmp(function, "update"))
 	{
-		return sql.exec("CREATE TABLE foo(a,b,c,d)");
+		return sql.exec(str[0]);
 	}
 	if (!strcmp(function, "return"))
+	{
+
+	}
+	if (!strcmp(function, "crypt"))
+	{
+
+	}
+	if (!strcmp(function, "decrypt"))
 	{
 
 	}
@@ -67,6 +82,10 @@ RVExtensionArgs(char* output, int outputSize, const char* function, const char**
 	if (!strcmp(function, "close"))
 	{
 		sql.~SQLITE();
+	}
+	if (!strcmp(function, "version"))
+	{
+		MACROS_STRNCPY(SQLITE_VERSION);
 	}
 
 	return -1;
