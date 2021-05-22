@@ -56,5 +56,8 @@
     <ClCompile Include="3rd\easylogging++.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sqlite_class.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

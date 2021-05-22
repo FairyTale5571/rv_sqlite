@@ -15,11 +15,17 @@
 #include <sstream>
 
 #include <boost/format.hpp>
+#include <boost/filesystem.hpp>
 
 
 // add headers that you want to pre-compile here
 #include "framework.h"
 
-#include "sqlite3/sqlite3.h"
+#include <SQLiteCpp/Database.h>
+
+
+#define CURRENT_VERSION "RV_SQLITE v0.1"
+#define MACROS_STRNCPY(x) strncpy_s(output, outputSize, x, _TRUNCATE)
+#define CBK(x,y) callbackPtr("rv_sqlite",x,y)
 
 #endif //PCH_H

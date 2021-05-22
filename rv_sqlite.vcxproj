@@ -81,13 +81,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <TargetName>rv_sqlite_x64</TargetName>
-    <IncludePath>C:\libs\boost_1_75_0;$(IncludePath)</IncludePath>
+    <IncludePath>C:\libs\vcpkg\installed\x86-windows\include;C:\libs\boost_1_75_0;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\libs\vcpkg\installed\x86-windows\lib;</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <TargetName>rv_sqlite_x64</TargetName>
-    <IncludePath>C:\libs\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\libs\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\libs\vcpkg\installed\x86-windows\include;C:\libs\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\libs\vcpkg\installed\x86-windows\lib;C:\libs\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -132,6 +133,8 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>C:\libs\boost_1_75_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -149,6 +152,8 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -177,6 +182,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="sqlite3\sqlite3.c" />
+    <ClCompile Include="sqlite_class.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

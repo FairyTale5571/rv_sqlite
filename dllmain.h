@@ -16,10 +16,6 @@ BOOL APIENTRY DllMain(HMODULE hModule,
     return TRUE;
 }
 
-#define CURRENT_VERSION "1.0.0 by FT5571 / rimasrp.life copyright"
-#define MACROS_STRNCPY(x) strncpy_s(output, outputSize, x, _TRUNCATE)
-#define CBK(x,y) callbackPtr("rv_sqlite",x,y)
-
 extern "C"
 {
 	__declspec (dllexport) void __stdcall RVExtensionRegisterCallback(int(*callbackProc)(char const* name, char const* function, char const* data));

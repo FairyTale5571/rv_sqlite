@@ -22,13 +22,15 @@ RVExtension(char* output, int outputSize, const char* function)
 	if (!strcmp(function, "version"))
 		MACROS_STRNCPY("0.0.1");
 
-	if (!strcmp(function,"version_sqlite"))
-		MACROS_STRNCPY(SQLITE_VERSION);
-
+	if (!strcmp(function, "version_sqlite"))
+		MACROS_STRNCPY("1.0");
+	else
+		MACROS_STRNCPY(boost::str(boost::format("Undefined '%1%' command") % function).c_str());
+	
 	strncpy(output, function, outputSize);
 }
 
-SQLITE sql;
+RvSqlite sql;
 
 int __stdcall 
 RVExtensionArgs(char* output, int outputSize, const char* function, const char** argv, int argc)
@@ -43,52 +45,78 @@ RVExtensionArgs(char* output, int outputSize, const char* function, const char**
 		str[i] = s.substr(1, s.length() - 2);
 		i++;
 	}
-	if (!callbackPtr)
-		return 500;
 
-	if (!strcmp(function, "open"))
+	try
 	{
-		sql.set_name(str[0]);
-		if (sql.open() != SQLITE_OK)
+		if (!callbackPtr)
+			return 500;
+
+		if (!strcmp(function, "open"))
 		{
-			out = boost::str(boost::format("Database Connection to %1% error %2%") % argv[0] % sql.get_name());
+			sql.set_name(str[0]);
+			if (sql.open() != 1)
+			{
+				out = boost::str(boost::format("Database Connection to %1% error %2%") % argv[0] % sql.get_name());
+				MACROS_STRNCPY(out.c_str());
+				return 404;
+			}
+			out = boost::str(boost::format("Database %1% Opened") % str[0]);
 			MACROS_STRNCPY(out.c_str());
-			return 404;
+			return sql.get_rc();
 		}
-		out = boost::str(boost::format("Database %1% Opened") % str[0]);
-		MACROS_STRNCPY( out.c_str() );
-		return sql.get_rc();
+		if (!strcmp(function, "openWithKey"))
+		{
+			sql.set_name(str[0]);
+			if (sql.open() != 1)
+			{
+				out = boost::str(boost::format("Database Connection to %1% error %2%") % argv[0] % sql.get_name());
+				MACROS_STRNCPY(out.c_str());
+				return 404;
+			}
+			out = boost::str(boost::format("Database %1% Opened") % str[0]);
+			MACROS_STRNCPY(out.c_str());
+			return sql.get_rc();
+		}
+
+		if (!strcmp(function, "update"))
+		{
+			return sql.exec(str[0]);
+		}
+		if (!strcmp(function, "return"))
+		{
+			return sql.exec(str[0]);
+		}
+		if (!strcmp(function, "crypt"))
+		{
+
+		}
+		if (!strcmp(function, "decrypt"))
+		{
+
+		}
+		if (!strcmp(function, "check"))
+		{
+			return sql.get_rc();
+		}
+		if (!strcmp(function, "close"))
+		{
+			sql.~RvSqlite();
+		}
+
+		return -1;
 	}
-	if (!strcmp(function, "update"))
-	{
-		return sql.exec(str[0]);
-	}
-	if (!strcmp(function, "return"))
+	catch (std::string exception)
 	{
 
 	}
-	if (!strcmp(function, "crypt"))
+	catch (const char * exception)
 	{
 
 	}
-	if (!strcmp(function, "decrypt"))
+	catch (...)
 	{
-
+		
 	}
-	if (!strcmp(function, "check"))
-	{
-		return sql.get_rc();
-	}
-	if (!strcmp(function, "close"))
-	{
-		sql.~SQLITE();
-	}
-	if (!strcmp(function, "version"))
-	{
-		MACROS_STRNCPY(SQLITE_VERSION);
-	}
-
-	return -1;
 }
 
 void __stdcall 
